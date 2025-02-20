@@ -38,11 +38,11 @@ const User = mongoose.model(
             type: String
         },
         movieGender: {
-            type: String,
+            type: Array,
             require: true
         },
         movieSubGender: {
-            type: String,
+            type: Array,
             require: true
         }, 
     },

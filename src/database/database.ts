@@ -6,7 +6,7 @@ const password = process.env.DATABASE_PASSWORD;
 const name = process.env.DATABASE_NAME;
 
 // string de conexão
-const uri = `mongodb+srv://${name}:${password}@cinepick-cluster.nslne.mongodb.net/`;
+const uri = `mongodb+srv://${name}:${password}@cinepick-cluster.nslne.mongodb.net/cinepick`;
 
 const clientOptions: ConnectOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 

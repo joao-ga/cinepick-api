@@ -17,14 +17,6 @@ const User = mongoose.model(
         email: {
             type: String,
             require: true
-        }, 
-        password: {
-            type: String,
-            require: true
-        },
-        confirmedPassword: {
-            type: String,
-            require: true
         },
         birth: {
             type: String,
@@ -39,11 +31,11 @@ const User = mongoose.model(
         },
         movieGender: {
             type: Array,
-            require: true
+            require: false
         },
         movieSubGender: {
             type: Array,
-            require: true
+            require: false
         }, 
     },
     {timestamps: true}

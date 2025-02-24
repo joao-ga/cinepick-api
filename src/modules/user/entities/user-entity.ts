@@ -37,6 +37,11 @@ const User = mongoose.model(
             type: Array,
             require: false
         }, 
+        active: {
+            type: Boolean,
+            require: true,
+            default: true
+        }
     },
     {timestamps: true}
     )

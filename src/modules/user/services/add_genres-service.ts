@@ -1,4 +1,4 @@
-import User from "../entities/user-entity";
+import { User } from "../entities/user-entity";
 import { Document } from "mongoose";
 
 class AddGenresService {

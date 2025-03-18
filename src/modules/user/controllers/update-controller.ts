@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import UpdateService from "../services/update-service";
 
-
 class UpdateUserController {
     static async updateUser(req: Request, res: Response): Promise<void> {
         try{

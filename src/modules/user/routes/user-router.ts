@@ -1,4 +1,3 @@
-
 import { Router } from "express";
 import CreatUserController from "../controllers/create-controller";
 import GetUserController from "../controllers/get-controller";

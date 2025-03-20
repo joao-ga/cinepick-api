@@ -23,7 +23,7 @@ async function startServer() {
 
     // Rotas
     app.use("/users", userRouter);
-    app.use("/movies", movieRouter);
+    app.use('/movies', movieRouter);
 
     const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {

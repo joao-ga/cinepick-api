@@ -1,13 +1,24 @@
 import { Request, Response } from "express";
-const genreService = require("../services/genreService");
+import GetGenresService from "../services/get_genres-service";
 
-const getGenres = async (req: Request, res: Response) => {
-    try {
-        const genres = await genreService.getAllGenres();
-        res.status(201).json(genres);
-    } catch (error) {
-        res.status(500).json({message: "Erro ao buscar gêneros"});
+class GetAllGenresController {
+    static async getGenres(req: Request, res: Response): Promise<void> {
+        try {
+            const service = new GetGenresService();
+            const genres = await service.getAllGenres();
+
+            if (genres) {
+                res.status(200).json(genres);
+                return;
+            } else {
+                res.status(400).json({ message: "Erro ao buscar gêneros" });
+                return;
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Erro interno do servidor" });
+        }
     }
-};
+}
 
-module.exports = { getGenres };
+export default GetAllGenresController;

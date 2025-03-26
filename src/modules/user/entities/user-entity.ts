@@ -8,7 +8,7 @@ interface IUser extends Document {
   phone: string;
   uid?: string;
   movieGender?: string[];
-  movieSubGender?: string[];
+  movies?: string[];
   active: boolean;
 }
 
@@ -22,7 +22,7 @@ const UserSchema = new Schema<IUser>(
     phone: { type: String, required: true },
     uid: { type: String },
     movieGender: { type: [String], required: false },
-    movieSubGender: { type: [String], required: false },
+    movies: { type: [String], required: false },
     active: { type: Boolean, required: true, default: true },
   },
   { timestamps: true }

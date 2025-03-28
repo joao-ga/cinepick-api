@@ -8,7 +8,7 @@ class GetMovieByName{
         try{
             const movie = await Movie.find({
                 title: { $regex: new RegExp(title, "i") }
-            }).select("title poster plot fullplot year genres");            
+            }).select("_id fullplot title poster genres runtime");            
 
             return movie;
         }

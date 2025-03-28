@@ -20,7 +20,7 @@ class GetMovies {
                     poster: { $exists: true, $ne: null }
                 }
             )
-            .select("_id fullplot title poster genres")
+            .select("_id fullplot title poster genres runtime")
             .sort({"imdb.rating": -1})
             .limit(20);
 

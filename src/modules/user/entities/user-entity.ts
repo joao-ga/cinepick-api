@@ -22,7 +22,7 @@ const UserSchema = new Schema<IUser>(
     phone: { type: String, required: true },
     uid: { type: String },
     movieGender: { type: [String], required: false },
-    movies: { type: [String], required: false },
+    movies: { type: [String], required: false, default: [] },
     active: { type: Boolean, required: true, default: true },
   },
   { timestamps: true }

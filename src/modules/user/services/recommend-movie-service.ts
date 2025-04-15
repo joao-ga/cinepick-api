@@ -5,7 +5,13 @@ class RecommendMovieService {
     async recommendMovies(userMovies: Array<string>): Promise<any> {
         try {
             const response = await axios.post('http://localhost:8080/recommend', { movies: userMovies });
-            return response.data;
+            let data = response.data;
+
+            while (typeof data === 'string') {
+                data = JSON.parse(data);
+            }
+
+            return data;
         } catch (error) {
             console.error('Error recommending movies:', error);
             throw error;

@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { cinepickConnection, sampleMflixConnection } from "./database/database";
-import userRoutes from "./modules/presentation/routes/user.routes";
-import movieRoutes from "./modules/presentation/routes/movie.routes";
+import userRouter from "./modules/user/routes/user-router";
+import movieRouter from "./modules/movies/router/movie-router";
 
 dotenv.config();
 
@@ -22,8 +22,8 @@ async function startServer() {
     console.log("Todas as conexões foram estabelecidas com sucesso");
 
     // Rotas
-    app.use("/api", userRoutes);
-    app.use("/api", movieRoutes); 
+    app.use("/users", userRouter);
+    app.use("/movies", movieRouter);
 
     const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {

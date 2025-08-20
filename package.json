@@ -22,12 +22,15 @@
   "homepage": "https://github.com/joao-ga/cinepick-api#readme",
   "dependencies": {
     "@types/mongoose": "^5.11.97",
+    "axios": "^1.8.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "install": "^0.13.0",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.1",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "npm": "^11.3.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

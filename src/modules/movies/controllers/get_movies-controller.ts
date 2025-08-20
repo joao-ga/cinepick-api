@@ -4,6 +4,7 @@ import GetMoviesService from "../services/get_movies-service";
 class GetMoviesController {
     static async getMovies(req:Request, res:Response): Promise<void> {
         try {
+            const page = req.query.page ? parseInt(req.query.page.toString()) : 1;
             const genres = req.query.genres?.toString().split(",") || [];
 
             if (genres.length === 0) {
@@ -12,7 +13,7 @@ class GetMoviesController {
             }
 
             const service = new GetMoviesService();
-            const moviesList = await service.getMovies(genres);
+            const moviesList = await service.getMovies(genres, page);
 
             if(moviesList){
                 res.status(200).json(moviesList);

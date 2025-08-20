@@ -61,7 +61,7 @@ const MovieSchema = new Schema<Movie>(
     tomatoes: { type: Object },
     num_mflix_comments: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 export const Movie: Model<Movie> = sampleMflixConnection.model<Movie>("movies", MovieSchema);

@@ -1,17 +1,20 @@
-import { Request, Response} from "express";
-import GetMovieByNameService from "../services/get_movie_by_name-service";
+import { Request, Response } from "express";
+import GetMovieByName from "../services/get_movie_by_name-service";
 
-class GetMovieByNameController{
-
-    static async getMovieByName(req:Request, res:Response): Promise<void>{
+class GetMovieByNameController {
+    static async getMovieByName(req: Request, res: Response): Promise<void> {
 
         const title = req.query.title?.toString() as string;
 
         try{
-            const service = new GetMovieByNameService;
+            const service = new GetMovieByName();
             const movie = await service.getMovieByName(title);
 
-            if (movie && movie.length > 0) {
+            if (movie && typeof movie === 'object' && 'message' in movie) {
+                res.status(404).json(movie);
+            }
+
+            else if (movie && movie._id) {
                 res.status(200).json(movie);
             }
             else {

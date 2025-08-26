@@ -10,6 +10,8 @@ interface IUser extends Document {
   movieGender?: string[];
   movies?: string[];
   active: boolean;
+  followersCount: number;
+  followingCount: number;
 }
 
 // Definição do Schema do Usuário
@@ -24,6 +26,8 @@ const UserSchema = new Schema<IUser>(
     movieGender: { type: [String], required: false },
     movies: { type: [String], required: false, default: [] },
     active: { type: Boolean, required: true, default: true },
+    followersCount: { type: Number, required: true, default: 0 },
+    followingCount: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
 );

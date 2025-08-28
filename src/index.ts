@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { cinepickConnection, sampleMflixConnection } from "./database/database";
 import userRouter from "./modules/user/routes/user-router";
 import movieRouter from "./modules/movies/router/movie-router";
+import followRouter from "./modules/follows/routes/follow-router";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ async function startServer() {
     // Rotas
     app.use("/users", userRouter);
     app.use("/movies", movieRouter);
+    app.use("/follows", followRouter);
 
     const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {

@@ -7,6 +7,7 @@ import AddGenresController from "../controllers/add_genres-controller";
 import AddMoviesController from "../controllers/add_movies-controller";
 import GetUserMovies from "../controllers/get_user_movies-controller";
 import RecommendMovieController from "../controllers/recommend-movie-controller";
+import SearchUserController from "../controllers/search_user-controller";
 const router = Router()
 
 // rota de registro de usuário
@@ -18,4 +19,5 @@ router.put('/addgenres', AddGenresController.handleGenres);
 router.put('/addmovies', AddMoviesController.handleMovies);
 router.get('/getusermovies/:uid', GetUserMovies.GetUserMovies);
 router.post('/recommend', RecommendMovieController.handleRecommendMovie);
+router.get('/searchuser', SearchUserController.searchUser);
 export default router;

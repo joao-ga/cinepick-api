@@ -2,14 +2,9 @@ import { Request, Response } from "express";
 import SearchUserService from "../services/search_user-service";
 import { Document } from "mongoose";
 
-
-interface SearchUser {
-    username: string;
-}
-
 class SearchUserController {
     static async searchUser(req: Request, res: Response): Promise<void> {
-        const username = req.query.username as string;
+        const username:string = req.query.username as string;
         try {
             const service = new SearchUserService();
             const user:Array<Document> | null = await service.searchUser(username);

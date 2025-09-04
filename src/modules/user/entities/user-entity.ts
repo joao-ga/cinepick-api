@@ -1,7 +1,9 @@
 import { Schema, Document, Model } from "mongoose";
 import { cinepickConnection } from "../../../database/database"; // Importando conexão correta
+
 interface IUser extends Document {
   name: string;
+  username: string;
   gender: string;
   email: string;
   birth: string;
@@ -18,6 +20,7 @@ interface IUser extends Document {
 const UserSchema = new Schema<IUser>(
   {
     name: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     gender: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     birth: { type: String, required: true },

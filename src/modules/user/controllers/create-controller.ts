@@ -15,9 +15,17 @@ class CreatUserController {
                 res.status(400).json({ message: "Erro ao criar usuário" });
                 return;
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            if (error.message && (
+                error.message.includes("ausente") || 
+                error.message.includes("deve ter") ||
+                error.message.includes("já está em uso")
+            )) {
+                res.status(400).json({ message: error.message });
+                return;
+            }
             res.status(500).json({ message: "Erro interno do servidor" });
+            return;
         }
     }
     

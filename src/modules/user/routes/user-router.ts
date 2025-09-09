@@ -9,9 +9,10 @@ import GetUserMovies from "../controllers/get_user_movies-controller";
 import RecommendMovieController from "../controllers/recommend-movie-controller";
 import SearchUserController from "../controllers/search_user-controller";
 import UserFolloweesMoviesController from "../controllers/get-followees-movies-controller";
+
 const router = Router()
 
-// rota de registro de usuário
+// Rotas de usuários
 router.post('/createuser', CreatUserController.createUser);
 router.get('/getuser/:uid', GetUserController.getUser);
 router.put('/updateuser', UpdateUserController.updateUser);
@@ -22,4 +23,5 @@ router.get('/getusermovies/:uid', GetUserMovies.GetUserMovies);
 router.post('/recommend', RecommendMovieController.handleRecommendMovie);
 router.get('/searchuser', SearchUserController.searchUser);
 router.get('/followeesmovies', UserFolloweesMoviesController.getFolloweesMovies);
+
 export default router;

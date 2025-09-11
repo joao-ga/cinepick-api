@@ -152,6 +152,11 @@ const options = {
               type: 'string',
               format: 'date-time',
               description: 'Data de criação da avaliação'
+            },
+            updated_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data da última atualização da avaliação'
             }
           },
           required: ['user_uid', 'movie_id', 'rating', 'comment']

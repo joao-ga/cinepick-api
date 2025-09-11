@@ -7,6 +7,7 @@ export interface IReview extends Document {
   comment: string;
   rating: number;
   created_at: Date;
+  updated_at: Date;
 }
 
 const ReviewSchema = new Schema<IReview>({
@@ -14,7 +15,8 @@ const ReviewSchema = new Schema<IReview>({
   movie_id: { type: String, required: true },
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
-  created_at: { type: Date, default: Date.now }
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
 });
 
 ReviewSchema.index({ user_uid: 1, movie_id: 1 }, { unique: true });

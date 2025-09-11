@@ -652,7 +652,7 @@ export const swaggerPaths = {
   // ===== REVIEWS ENDPOINTS =====
   '/reviews/createreview': {
     post: {
-      summary: 'Criar uma nova avaliação de filme',
+      summary: 'Criar uma nova avaliação de um filme',
       tags: ['Reviews'],
       requestBody: {
         required: true,
@@ -692,6 +692,102 @@ export const swaggerPaths = {
       responses: {
         201: {
           description: 'Avaliação criada com sucesso',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Review' }
+            }
+          }
+        },
+        400: { $ref: '#/components/responses/BadRequest' },
+        500: { $ref: '#/components/responses/InternalServerError' }
+      }
+    }
+  },
+
+  '/reviews/updatereview': {
+    put: {
+      summary: 'Atualiza uma avaliação de um filme existente',
+      tags: ['Reviews'],
+      requestBody: {
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              required: ['user_uid', 'movie_id', 'rating', 'comment'],
+              properties: {
+                user_uid: {
+                  type: 'string',
+                  description: 'UID do usuário',
+                  example: 'user123'
+                },
+                movie_id: {
+                  type: 'string',
+                  description: 'ID do filme',
+                  example: 'movie456'
+                },
+                rating: {
+                  type: 'number',
+                  minimum: 1,
+                  maximum: 5,
+                  description: 'Nota da avaliação (1-5)',
+                  example: 4
+                },
+                comment: {
+                  type: 'string',
+                  description: 'Comentário da avaliação',
+                  example: 'Excelente filme!'
+                }
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        200: {
+          description: 'Avaliação atualizada com sucesso',
+          content: {
+            'application/json': {
+              schema: { $ref: '#/components/schemas/Review' }
+            }
+          }
+        },
+        400: { $ref: '#/components/responses/BadRequest' },
+        500: { $ref: '#/components/responses/InternalServerError' }
+      }
+    }
+  },
+
+  '/reviews/deletereview': {
+    delete: {
+      summary: 'Exclui uma avaliação de um filme',
+      tags: ['Reviews'],
+      requestBody: {
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              required: ['user_uid', 'movie_id'],
+              properties: {
+                user_uid: {
+                  type: 'string',
+                  description: 'UID do usuário',
+                  example: 'user123'
+                },
+                movie_id: {
+                  type: 'string',
+                  description: 'ID do filme',
+                  example: 'movie456'
+                },
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        200: {
+          description: 'Avaliação excluida com sucesso',
           content: {
             'application/json': {
               schema: { $ref: '#/components/schemas/Review' }

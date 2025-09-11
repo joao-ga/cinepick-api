@@ -3,13 +3,14 @@ import { Review } from "../entities/review-entity";
 import { Document } from "mongoose";
 
 interface IReview {
-   user_uid: string;
-   movie_id: string;
-   rating: number;
-   comment: string;
+    user_uid: string;
+    movie_id: string;
+    rating: number;
+    comment: string;
 }
 
 class CreateReviewService {
+    
     async createReview(data: IReview): Promise<Document | null> {
         try {
             const userExists = await this.getIfUserExists(data.user_uid);
@@ -44,7 +45,6 @@ class CreateReviewService {
             console.error(error);
             return false;
         }
-
     }
 
     private async getIfUserAlreadyReviewed(user_uid: string, movie_id: string): Promise<boolean> {
@@ -59,7 +59,6 @@ class CreateReviewService {
             console.error(error);
             return false;
         }
-        
     }
 }
 

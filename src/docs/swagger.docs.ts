@@ -864,5 +864,65 @@ export const swaggerPaths = {
         500: { $ref: '#/components/responses/InternalServerError' }
       }
     }
+  },
+
+  // ===== AUTH ENDPOINTS =====
+'/auth/token': {
+  post: {
+    summary: 'Gerar tokens JWT',
+    tags: ['Auth'],
+    requestBody: {
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            type: 'object',
+            required: ['uid'],
+            properties: {
+              uid: {
+                type: 'string',
+                description: 'Identificador do usuário',
+                example: 'user123'
+              },
+              email: {
+                type: 'string',
+                format: 'email',
+                description: 'Email do usuário',
+                example: 'user@example.com'
+              },
+              roles: {
+                type: 'array',
+                items: { type: 'string' },
+                description: 'Papéis do usuário',
+                example: ['user']
+              }
+            }
+          }
+        }
+      }
+    },
+    responses: {
+      201: {
+        description: 'Tokens gerados com sucesso',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                accessToken: { type: 'string' },
+                refreshToken: { type: 'string' },
+                expiresIn: {
+                  type: 'integer',
+                  description: 'Expiração do access token em segundos',
+                  example: 900
+                }
+              }
+            }
+          }
+        }
+      },
+      400: { $ref: '#/components/responses/BadRequest' }
+    }
   }
+}
 };

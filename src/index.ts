@@ -31,10 +31,10 @@ app.get("/", (_req, res) => {
 });
 
    // Rotas
-    app.use("/users", userRouter);
-    app.use("/movies", movieRouter);
-    app.use("/follows", followRouter);
-    app.use("/reviews", reviewRouter);
+  app.use("/users", userRouter);
+  app.use("/movies", movieRouter);
+  app.use("/follows", followRouter);
+  app.use("/reviews", reviewRouter);
 
 async function startServer() {
     try {
@@ -61,7 +61,7 @@ async function startServer() {
         // (Opcional) Porta interna 8000 para saúde/debug local
         const PORT = Number(process.env.PORT) || 8000;
         app.listen(PORT, () => {
-            console.log(`ℹ️ CinePick (interno) na porta ${PORT}`);
+            console.log(`CinePick (interno) na porta ${PORT}`);
         });
 
     } catch (err) {

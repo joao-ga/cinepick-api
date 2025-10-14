@@ -24,6 +24,14 @@ const options = {
     paths: swaggerPaths,
     components: {
       schemas: {
+        Auth: {
+          type: 'object',
+          properties: {
+            accessToken: { type: 'string' },
+            refreshToken: { type: 'string' },
+            expiresIn: { type: 'number' }
+          }
+        },
         User: {
           type: 'object',
           properties: {

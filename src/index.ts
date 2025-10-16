@@ -10,6 +10,7 @@ import userRouter from "./modules/user/routes/user-router";
 import movieRouter from "./modules/movies/router/movie-router";
 import followRouter from "./modules/follows/routes/follow-router";
 import reviewRouter from "./modules/review/routes/review-routes";
+import authRouter from "./modules/auth/routes/auth-router";
 import { setupSwagger } from "./swagger.config";
 
 dotenv.config();
@@ -35,6 +36,7 @@ app.get("/", (_req, res) => {
   app.use("/movies", movieRouter);
   app.use("/follows", followRouter);
   app.use("/reviews", reviewRouter);
+  app.use("/auth", authRouter);
 
 async function startServer() {
     try {
@@ -54,8 +56,8 @@ async function startServer() {
 
         const httpsServer = https.createServer({ key, cert }, app);
         httpsServer.listen(443, () => {
-            console.log("✅ CinePick HTTPS na porta 443");
-            console.log(`🔗 Docs: https://${DOMAIN}/api-docs`);
+            console.log("CinePick HTTPS na porta 443");
+            console.log(`Docs: https://${DOMAIN}/api-docs`);
         });
 
         // (Opcional) Porta interna 8000 para saúde/debug local

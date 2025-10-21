@@ -14,6 +14,8 @@ interface IUser extends Document {
   active: boolean;
   followersCount: number;
   followingCount: number;
+  accessToken?: string;
+  refreshToken?: string;
 }
 
 // Definição do Schema do Usuário
@@ -31,6 +33,8 @@ const UserSchema = new Schema<IUser>(
     active: { type: Boolean, required: true, default: true },
     followersCount: { type: Number, required: true, default: 0 },
     followingCount: { type: Number, required: true, default: 0 },
+    accessToken: { type: String },
+    refreshToken: { type: String },
   },
   { timestamps: true }
 );

@@ -12,6 +12,7 @@ import followRouter from "./modules/follows/routes/follow-router";
 import reviewRouter from "./modules/review/routes/review-routes";
 import authRouter from "./modules/auth/routes/auth-router";
 import { setupSwagger } from "./swagger.config";
+import { ensureAuthenticated } from "./modules/auth/middlewares/ensure-authenticated";
 
 dotenv.config();
 
@@ -32,11 +33,11 @@ app.get("/", (_req, res) => {
 });
 
    // Rotas
-  app.use("/users", userRouter);
-  app.use("/movies", movieRouter);
-  app.use("/follows", followRouter);
-  app.use("/reviews", reviewRouter);
-  app.use("/auth", authRouter);
+  app.use("/api/users", ensureAuthenticated, userRouter);
+  app.use("/api/movies", ensureAuthenticated, movieRouter);
+  app.use("/api/follows", ensureAuthenticated, followRouter);
+  app.use("/api/reviews", ensureAuthenticated, reviewRouter);
+  app.use("/api/auth", authRouter);
 
 async function startServer() {
     try {

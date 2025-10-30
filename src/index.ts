@@ -33,7 +33,7 @@ app.get("/", (_req, res) => {
 });
 
    // Rotas
-  app.use("/api/users", ensureAuthenticated, userRouter);
+  app.use("/api/users", userRouter);
   app.use("/api/movies", ensureAuthenticated, movieRouter);
   app.use("/api/follows", ensureAuthenticated, followRouter);
   app.use("/api/reviews", ensureAuthenticated, reviewRouter);
@@ -47,19 +47,20 @@ async function startServer() {
         ]);
         console.log("Todas as conexões foram estabelecidas com sucesso");
 
-        // Lê os certificados emitidos para api.biluvm.shop (Let's Encrypt)
-        const DOMAIN = process.env.DOMAIN ?? "api.biluvm.shop";
-        const CERT_PATH = process.env.CERT_PATH ?? `/etc/letsencrypt/live/${DOMAIN}`;
-
-        // Tipos explícitos: o https.createServer aceita Buffer
-        const key: Buffer  = fs.readFileSync(path.join(CERT_PATH, "privkey.pem"));
-        const cert: Buffer = fs.readFileSync(path.join(CERT_PATH, "fullchain.pem"));
-
-        const httpsServer = https.createServer({ key, cert }, app);
-        httpsServer.listen(443, () => {
-            console.log("CinePick HTTPS na porta 443");
-            console.log(`Docs: https://${DOMAIN}/api-docs`);
-        });
+        //
+        // // Lê os certificados emitidos para api.biluvm.shop (Let's Encrypt)
+        // const DOMAIN = process.env.DOMAIN ?? "api.biluvm.shop";
+        // const CERT_PATH = process.env.CERT_PATH ?? `/etc/letsencrypt/live/${DOMAIN}`;
+        //
+        // // Tipos explícitos: o https.createServer aceita Buffer
+        // const key: Buffer  = fs.readFileSync(path.join(CERT_PATH, "privkey.pem"));
+        // const cert: Buffer = fs.readFileSync(path.join(CERT_PATH, "fullchain.pem"));
+        //
+        // const httpsServer = https.createServer({ key, cert }, app);
+        // httpsServer.listen(443, () => {
+        //     console.log("CinePick HTTPS na porta 443");
+        //     console.log(`Docs: https://${DOMAIN}/api-docs`);
+        // });
 
         // (Opcional) Porta interna 8000 para saúde/debug local
         const PORT = Number(process.env.PORT) || 8000;

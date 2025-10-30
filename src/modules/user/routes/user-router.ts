@@ -10,20 +10,21 @@ import RecommendMovieController from "../controllers/recommend-movie-controller"
 import SearchUserController from "../controllers/search_user-controller";
 import UserFolloweesMoviesController from "../controllers/get-followees-movies-controller";
 import GetFirstLoginController from "../controllers/get_first_login-controller";
+import {ensureAuthenticated} from "../../auth/middlewares/ensure-authenticated";
 
 const router = Router()
 
 // Rotas de usuários
 router.post('/createuser', CreatUserController.createUser);
-router.get('/getuser/:uid', GetUserController.getUser);
-router.put('/updateuser', UpdateUserController.updateUser);
-router.put('/deleteuser', DeleteUserController.deleteUser);
-router.put('/addgenres', AddGenresController.handleGenres);
-router.put('/addmovies', AddMoviesController.handleMovies);
-router.get('/getusermovies/:uid', GetUserMovies.GetUserMovies);
-router.post('/recommend', RecommendMovieController.handleRecommendMovie);
-router.get('/searchuser', SearchUserController.searchUser);
-router.get('/followeesmovies', UserFolloweesMoviesController.getFolloweesMovies);
-router.get('/firstlogin/:uid', GetFirstLoginController.getFirstLogin);
+router.get('/getuser/:uid', ensureAuthenticated, GetUserController.getUser);
+router.put('/updateuser', ensureAuthenticated, UpdateUserController.updateUser);
+router.put('/deleteuser', ensureAuthenticated, DeleteUserController.deleteUser);
+router.put('/addgenres', ensureAuthenticated, AddGenresController.handleGenres);
+router.put('/addmovies', ensureAuthenticated, AddMoviesController.handleMovies);
+router.get('/getusermovies/:uid', ensureAuthenticated, GetUserMovies.GetUserMovies);
+router.post('/recommend', ensureAuthenticated, RecommendMovieController.handleRecommendMovie);
+router.get('/searchuser', ensureAuthenticated, SearchUserController.searchUser);
+router.get('/followeesmovies', ensureAuthenticated, UserFolloweesMoviesController.getFolloweesMovies);
+router.get('/firstlogin/:uid', ensureAuthenticated, GetFirstLoginController.getFirstLogin);
 
 export default router;

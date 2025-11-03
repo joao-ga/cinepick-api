@@ -2,13 +2,14 @@ import { Document } from "mongoose";
 import { Review } from "../entities/review-entity";
 import { User } from "../../user/entities/user-entity";
 import { Follow } from "../../follows/entities/follow-entity";
+import { Movie } from "../../movies/entities/movie-entity";
 
 interface IUserFollowersReview {
     uid: string;
 }
 
 class GetUserFollowersReviewService {
-    async getUserFollowersReview(data: IUserFollowersReview): Promise<Document[] | null> {
+    async getUserFollowersReview(data: IUserFollowersReview): Promise<any[] | null> {
         const uid = data.uid;
         try {
             const userExists = await this.getIfUserExists(uid);
@@ -30,9 +31,41 @@ class GetUserFollowersReviewService {
             }
 
             const followees = await this.getUserFollowees(uid);
+            const followeeIds = followees.map((f: any) => f.followee_id);
 
-            const reviews = await Review.find({ user_uid: { $in: followees.map((followee: any) => followee.followee_id) } });
-            return reviews;
+            const users = await User.find({ uid: { $in: followeeIds } })
+                .select("uid name")
+                .lean();
+            const uidToName = new Map<string, string>(
+                users.map((u: any) => [u.uid, u.name])
+            );
+
+            const reviews = await Review.find({
+                user_uid: { $in: followeeIds }
+            }).lean();
+
+            const movieIds = reviews.map((r: any) => r.movie_id);
+            const movies = await Movie.find({ _id: { $in: movieIds } })
+                .select("_id title poster")
+                .lean();
+            const idToMovie = new Map<string, { title?: string; poster?: string }>(
+                movies.map((m: any) => [String(m._id), { title: m.title, poster: m.poster }])
+            );
+
+            const reviewsWithName = reviews.map((r: any, idx: number) => {
+                const { user_uid, movie_id, ...rest } = r;
+                const movie = idToMovie.get(String(movie_id)) ?? {};
+                const enriched = {
+                    ...rest,
+                    uid: user_uid, 
+                    user_name: uidToName.get(user_uid) ?? null,
+                    title: movie.title ?? null,
+                    poster: movie.poster ?? null
+                };
+                return enriched;
+            });
+
+            return reviewsWithName;
         } catch (error) {
             console.error(error);
             return null;

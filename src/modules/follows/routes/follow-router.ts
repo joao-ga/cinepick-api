@@ -8,6 +8,6 @@ const router = Router();
 // Rotas de seguir usuários
 router.post("/follow", FollowUserController.follow);
 router.post("/unfollow", (req, res, next) => { void UnfollowUserController.unfollow(req, res).catch(next); });
-router.get("/check-follower", CheckFollowerController.checkFollower);
+router.post("/check-follower", CheckFollowerController.checkFollower);
 
 export default router;

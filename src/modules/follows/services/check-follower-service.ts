@@ -10,7 +10,7 @@ export class CheckFollowerService {
                 followee_id: followee_id
             });
 
-            if(!response) {
+            if(response == null) {
                 return false
             } else {
                 return true

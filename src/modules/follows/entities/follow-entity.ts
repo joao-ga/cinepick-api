@@ -15,4 +15,4 @@ const FollowSchema = new Schema<IFollow>({
 
 FollowSchema.index({ follower_id: 1, followee_id: 1 }, { unique: true });
 
-export const Follow: Model<IFollow> = cinepickConnection.model<IFollow>("Follow", FollowSchema);
+export const Follow: Model<IFollow> = cinepickConnection.model<IFollow>("Follows", FollowSchema);

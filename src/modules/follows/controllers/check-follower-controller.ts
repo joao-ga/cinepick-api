@@ -7,9 +7,9 @@ export class CheckFollowerController {
         const followee_id = req.body.followee_id;
 
         try {
-            const response = CheckFollowerService.checkFollower(follower_id, followee_id);
+            const response = await CheckFollowerService.checkFollower(follower_id, followee_id);
 
-            res.status(201).json({ isFollowing:  response});
+            res.status(200).json({ isFollowing:  response});
 
         } catch (e) {
             console.log('error', e)

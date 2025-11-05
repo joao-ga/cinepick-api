@@ -649,6 +649,51 @@ export const swaggerPaths = {
     }
   },
 
+  '/follows/follow-each-other': {
+    get: {
+      summary: 'Verifica se 2 usuários se seguem mutuamente',
+      tags: ['Follows'],
+      parameters: [
+        {
+          in: 'query',
+          name: 'userId1',
+          required: true,
+          schema: { type: 'string' },
+          description: 'UID do usuário 1',
+          example: 'user123'
+        },
+        {
+          in: 'query',
+          name: 'userId2',
+          required: true,
+          schema: { type: 'string' },
+          description: 'UID do usuário 2',
+          example: 'user456'
+        }
+      ],
+      responses: {
+        200: {
+          description: 'Cada um segue o outro',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  followEachOther: {
+                    type: 'boolean',
+                    example: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        400: { $ref: '#/components/responses/BadRequest' },
+        500: { $ref: '#/components/responses/InternalServerError' }
+      }
+    }
+  },
+
   // ===== REVIEWS ENDPOINTS =====
   '/reviews/createreview': {
     post: {
